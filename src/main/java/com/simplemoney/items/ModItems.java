@@ -3,6 +3,7 @@ package com.simplemoney.items;
 import com.simplemoney.Simplemoney;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.TooltipDisplayComponent;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
@@ -11,8 +12,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -84,6 +90,18 @@ public class ModItems {
                 public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
                     textConsumer.accept(Text.translatable("tooltip.simplemoney.money_bill.tooltip"));
                     super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+                }
+                @Override
+                public ActionResult use(World world, PlayerEntity user, Hand hand) {
+
+                    if (!world.isClient()) {
+                        // Throw only one item from stack like clicking q
+                        user.dropItem(user.getStackInHand(hand).split(1), false);
+                        // Play sound effect for using the money bill
+                        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 0.6f, 6.0f);
+                    }
+
+                    return ActionResult.SUCCESS;
                 }
             }
     );
