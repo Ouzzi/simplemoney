@@ -1,6 +1,7 @@
 package com.simplemoney.items;
 
 import com.simplemoney.Simplemoney;
+import com.simplemoney.items.custom.EnhancedFireworkRocketItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.player.PlayerEntity;
@@ -106,6 +107,10 @@ public class ModItems {
             }
     );
 
+    public static final Item ENHANCED_FIREWORK_ROCKET = registerItem(
+            "enhanced_firework_rocket",setting ->  new EnhancedFireworkRocketItem(setting.maxCount(16)) // Setzen Sie Ihre Item-Einstellungen
+    );
+
 
     /**
      * Registriert ein Item unter einem einfachen Namen und der Mod-ID.
@@ -114,7 +119,6 @@ public class ModItems {
      * @return Das registrierte Item.
      */
     public static Item registerItem(String name, Item item) {
-
         return Registry.register(Registries.ITEM, Identifier.of(Simplemoney.MOD_ID, name), item);
     }
 
@@ -143,6 +147,7 @@ public class ModItems {
             entries.add(BANKNOTE_BLANK);
             entries.add(FRESH_BILL);
             entries.add(MONEY_BILL);
+            entries.add(ENHANCED_FIREWORK_ROCKET);
         });
     }
 

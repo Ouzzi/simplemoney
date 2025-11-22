@@ -3,7 +3,8 @@
 	"package": "com.simplemoney.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"FireworkRocketItemMixin"
+		"FireworkRocketItemMixin",
+        "FireworkRocketEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

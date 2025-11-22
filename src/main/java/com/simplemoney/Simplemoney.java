@@ -1,5 +1,6 @@
 package com.simplemoney;
 
+import com.simplemoney.entity.ModEntities;
 import com.simplemoney.items.ModItemGroups;
 import com.simplemoney.items.ModItems;
 import com.simplemoney.recipe.ModRecipes;
@@ -52,6 +53,9 @@ public class Simplemoney implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Starting Simplemoney initialization...");
+
+        // Registriert alle benutzerdefinierten Entitäten des Mods.
+        ModEntities.registerModEntities();
 
         // Registriert alle Item Gruppen (Creative Tabs)
         ModItemGroups.registerItemGroups();
