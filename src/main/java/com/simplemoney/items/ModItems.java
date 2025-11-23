@@ -150,15 +150,6 @@ public class ModItems {
      */
     public static void registerModItems() {
         Simplemoney.LOGGER.info("Registering Mod Items for " + Simplemoney.MOD_ID);
-
-        // Fügt alle Währungs-Items zur Standard "Ingredients" Item Group hinzu.
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.add(BANKNOTE_PAPER);
-            entries.add(BANKNOTE_FIBER);
-            entries.add(BANKNOTE_BLANK);
-            entries.add(FRESH_BILL);
-            entries.add(MONEY_BILL);
-        });
     }
 
 }
