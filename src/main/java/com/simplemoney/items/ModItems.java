@@ -116,17 +116,6 @@ public class ModItems {
             }
     );
 
-
-    /**
-     * Registriert ein Item unter einem einfachen Namen und der Mod-ID.
-     * @param name Der Bezeichner des Items (z.B. "special_fiber").
-     * @param item Das zu registrierende Item-Objekt.
-     * @return Das registrierte Item.
-     */
-    public static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(Simplemoney.MOD_ID, name), item);
-    }
-
     /**
      * Hilfsmethode zur Registrierung eines Items unter Verwendung einer Funktion,
      * die die Item.Settings-Konfiguration anwendet.

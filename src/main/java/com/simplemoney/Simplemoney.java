@@ -1,11 +1,14 @@
 package com.simplemoney;
 
+import com.simplemoney.config.SimpleMoneyConfig;
 import com.simplemoney.entity.ModEntities;
 import com.simplemoney.items.ModItemGroups;
 import com.simplemoney.items.ModItems;
 import com.simplemoney.recipe.ModRecipes;
 import com.simplemoney.util.ModLootTableModifiers;
 import com.simplemoney.util.ModTradeOffers;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -25,7 +28,7 @@ public class Simplemoney implements ModInitializer {
 	/** Der Logger für die Protokollierung von Mod-Ereignissen und Debugging. */
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-
+    private static SimpleMoneyConfig CONFIG;
 
 	/**
 	 * Die Hauptmethode, die beim Start des Mods von Fabric aufgerufen wird.
@@ -35,25 +38,20 @@ public class Simplemoney implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Starting Simplemoney initialization...");
 
-        // Registriert alle benutzerdefinierten Entitäten des Mods.
+        // 1. WICHTIG: Config ZUERST laden!
+        AutoConfig.register(SimpleMoneyConfig.class, GsonConfigSerializer::new);
+        CONFIG = AutoConfig.getConfigHolder(SimpleMoneyConfig.class).getConfig();
+
         ModEntities.registerModEntities();
-
-        // Registriert alle Item Gruppen (Creative Tabs)
         ModItemGroups.registerItemGroups();
-
-        // Registriert alle Custom Items des Mods.
 		ModItems.registerModItems();
-
-		// Registriert alle Crafting- und Schmelzrezepte des Mods.
 		ModRecipes.registerRecipes();
-
-        // Registriert alle Loot Table Modifikationen des Mods.
         ModLootTableModifiers.modifyLootTables();
-
-        // Registriert benutzerdefinierte Handelsangebote für Dorfbewohner
         ModTradeOffers.registerModTradeOffers();
 
 	}
 
-
+    public static SimpleMoneyConfig getConfig() {
+        return CONFIG;
+    }
 }

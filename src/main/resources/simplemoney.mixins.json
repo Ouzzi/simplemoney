@@ -3,7 +3,10 @@
 	"package": "com.simplemoney.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"FireworkRocketItemMixin"
+        "VaultServerDataMixin",
+        "VaultBlockEntityMixin",
+        "VaultBlockEntityServerMixin",
+        "ItemStackMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

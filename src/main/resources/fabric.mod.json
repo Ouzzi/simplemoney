@@ -20,7 +20,10 @@
 		],
 		"fabric-datagen": [
 			"com.simplemoney.SimplemoneyDataGenerator"
-		]
+		],
+        "modmenu": [
+          "com.simplemoney.compat.ModMenuIntegration"
+        ]
 	},
 	"mixins": [
 		"simplemoney.mixins.json"

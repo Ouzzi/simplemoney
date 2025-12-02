@@ -11,5 +11,26 @@
     "tooltip.simplemoney.raw_bill.tooltip": "Still damp from the press.",
     "tooltip.simplemoney.money_bill.tooltip": "Highest trading value.",
 
-    "itemgroup.simplemoney.money_items": "Currency Materials"
+    "itemgroup.simplemoney.money_items": "Currency Materials",
+
+    "text.autoconfig.simplemoney.title": "SimpleMoney Config",
+
+    "text.autoconfig.simplemoney.category.default": "General",
+
+    "text.autoconfig.simplemoney.option.trades": "Trades Settings",
+    "text.autoconfig.simplemoney.option.trades.enableVillagerTrades": "Enable Villager Trades",
+    "text.autoconfig.simplemoney.option.trades.enableVillagerTrades.tooltip": "Enables or disables custom trades for villagers.",
+
+    "text.autoconfig.simplemoney.option.trades.enableWanderingTrades": "Enable Wandering Trades",
+    "text.autoconfig.simplemoney.option.trades.enableWanderingTrades.tooltip": "Enables or disables custom trades for the Wandering Trader.",
+
+    "text.autoconfig.simplemoney.option.balancing": "Balancing",
+    "text.autoconfig.simplemoney.option.balancing.rocketStackSize": "Rocket Stack Size",
+
+    "text.autoconfig.simplemoney.option.balancing.rocketStackSize.tooltip[0]": "Default: 64.",
+    "text.autoconfig.simplemoney.option.balancing.rocketStackSize.tooltip[1]": "Set to 16 to nerf elytra flight.",
+
+    "text.autoconfig.simplemoney.option.vaults": "Vault Settings",
+    "text.autoconfig.simplemoney.option.vaults.vaultCooldownDays": "Vault Cooldown (Days)",
+    "text.autoconfig.simplemoney.option.vaults.vaultCooldownDays.tooltip": "Time in Minecraft days until a player can loot a vault again."
 }
