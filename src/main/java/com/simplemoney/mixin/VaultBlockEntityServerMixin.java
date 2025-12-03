@@ -1,6 +1,8 @@
 package com.simplemoney.mixin;
 
+import com.simplemoney.Simplemoney;
 import com.simplemoney.util.IVaultCooldown;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.VaultBlockEntity;
 import net.minecraft.block.vault.VaultConfig;
@@ -15,46 +17,96 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Mixin(VaultBlockEntity.Server.class)
 public class VaultBlockEntityServerMixin {
 
-    @Inject(method = "tryUnlock", at = @At("HEAD"))
-    private static void checkCooldown(ServerWorld world, BlockPos pos, BlockState state, VaultConfig config, VaultServerData serverData, VaultSharedData sharedData, PlayerEntity player, ItemStack stack, CallbackInfo ci) {
+    // --- TICK LOGIK ---
+    @Inject(method = "tick", at = @At("HEAD"))
+    private static void tickCooldowns(ServerWorld world, BlockPos pos, BlockState state, VaultConfig config, VaultServerData serverData, VaultSharedData sharedData, CallbackInfo ci) {
+        // Nur jede Sekunde (20 Ticks) prüfen
+        if (world.getTime() % 20 != 0) return;
+
         if (serverData instanceof IVaultCooldown cooldownData) {
-            UUID uuid = player.getUuid();
             long now = world.getTime();
 
-            // 1. Zugriff auf Server-Liste (Verhinderte Spieler) via Accessor
+            // Wir brauchen Zugriff auf die Sets
             Set<UUID> rewardedPlayers = ((VaultServerDataAccessor) serverData).getRewardedPlayersSet();
+            Set<UUID> connectedPlayers = ((VaultSharedDataAccessor) sharedData).getConnectedPlayersSet();
 
-            // Wenn der Spieler schon in der Liste ist...
-            if (rewardedPlayers.contains(uuid)) {
-                // ...aber der Cooldown ist abgelaufen...
+            // Kopie erstellen, um ConcurrentModificationException zu vermeiden (da wir im Loop löschen wollen)
+            Set<UUID> playersToCheck = new HashSet<>(rewardedPlayers);
+            boolean changed = false;
+
+            for (UUID uuid : playersToCheck) {
+                // Hat der Spieler seinen Cooldown abgesessen?
+                // Hinweis: hasLootedRecently liefert 'false' zurück, wenn der Cooldown VORBEI ist.
                 if (!cooldownData.hasLootedRecently(uuid, now)) {
 
-                    // -> Spieler aus der Server-Liste löschen (damit er looten darf)
+                    // JA! Cooldown vorbei. Spieler entfernen.
                     rewardedPlayers.remove(uuid);
-
-                    // 2. Zugriff auf Client-Sync-Liste (Partikel) via Accessor
-                    // Damit auch die Partikel-Effekte für den Spieler zurückgesetzt werden
-                    Set<UUID> connectedPlayers = ((VaultSharedDataAccessor) sharedData).getConnectedPlayersSet();
                     connectedPlayers.remove(uuid);
+                    Simplemoney.LOGGER.info("Vault Tick: Cooldown abgelaufen für " + uuid);
+                    changed = true;
                 }
+            }
+
+            // Wenn wir jemanden gelöscht haben, müssen wir speichern und syncen
+            if (changed) {
+                ((VaultServerDataAccessor) serverData).setDirty(true);
+                ((VaultSharedDataAccessor) sharedData).setDirty(true);
+
+                // FIX: Statischen markDirty Aufruf nutzen!
+                // Da markDirty protected sein könnte, nutzen wir world.markDirty oder einen Accessor/Invoker falls nötig.
+                // Aber VaultBlockEntity.markDirty(world, pos, state) ist oft protected.
+                // Einfacher: world.markDirty(pos) reicht meistens!
+                world.markDirty(pos);
+
+                // Status Update an alle senden
+                world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+            }
+        }
+    }
+
+    // --- ALTE LOGIK (Als Sicherheit beim Klicken) ---
+    @Inject(method = "tryUnlock", at = @At("HEAD"))
+    private static void checkCooldownClick(ServerWorld world, BlockPos pos, BlockState state, VaultConfig config, VaultServerData serverData, VaultSharedData sharedData, PlayerEntity player, ItemStack stack, CallbackInfo ci) {
+        // Diese Methode fängt Fälle ab, wo der Tick vielleicht noch nicht lief,
+        // der Spieler aber schon klickt.
+        if (serverData instanceof IVaultCooldown cooldownData) {
+            UUID uuid = player.getUuid();
+            Set<UUID> rewardedPlayers = ((VaultServerDataAccessor) serverData).getRewardedPlayersSet();
+
+            if (rewardedPlayers.contains(uuid) && !cooldownData.hasLootedRecently(uuid, world.getTime())) {
+                // Sofortiger Reset beim Klick
+                rewardedPlayers.remove(uuid);
+                Set<UUID> connectedPlayers = ((VaultSharedDataAccessor) sharedData).getConnectedPlayersSet();
+                connectedPlayers.remove(uuid);
+
+                ((VaultServerDataAccessor) serverData).setDirty(true);
+                ((VaultSharedDataAccessor) sharedData).setDirty(true);
+                world.updateListeners(pos, state, state, 3);
+
+                Simplemoney.LOGGER.info("Vault Klick-Reset für " + player.getName().getString());
             }
         }
     }
 
     @Inject(method = "tryUnlock", at = @At("TAIL"))
     private static void saveCooldown(ServerWorld world, BlockPos pos, BlockState state, VaultConfig config, VaultServerData serverData, VaultSharedData sharedData, PlayerEntity player, ItemStack stack, CallbackInfo ci) {
-        // Zugriff via Accessor prüfen, ob Loot erfolgreich war
         Set<UUID> rewardedPlayers = ((VaultServerDataAccessor) serverData).getRewardedPlayersSet();
 
+        // Wenn Loot erfolgreich war -> Zeit speichern
         if (rewardedPlayers.contains(player.getUuid())) {
             if (serverData instanceof IVaultCooldown cooldownData) {
                 cooldownData.markLooted(player.getUuid(), world.getTime());
+                ((VaultServerDataAccessor) serverData).setDirty(true);
+
+                // Debug
+                Simplemoney.LOGGER.info("Vault: Zeit gespeichert für " + player.getName().getString());
             }
         }
     }

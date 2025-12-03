@@ -38,7 +38,6 @@ public class Simplemoney implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Starting Simplemoney initialization...");
 
-        // 1. WICHTIG: Config ZUERST laden!
         AutoConfig.register(SimpleMoneyConfig.class, GsonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(SimpleMoneyConfig.class).getConfig();
 

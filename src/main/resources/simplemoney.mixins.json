@@ -3,9 +3,11 @@
 	"package": "com.simplemoney.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-        "VaultServerDataMixin",
         "VaultBlockEntityMixin",
+        "VaultServerDataMixin",
         "VaultBlockEntityServerMixin",
+        "VaultServerDataAccessor",
+        "VaultSharedDataAccessor",
         "ItemStackMixin"
 	],
 	"injectors": {

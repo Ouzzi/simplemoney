@@ -26,7 +26,6 @@ public abstract class VaultBlockEntityMixin extends BlockEntity {
 
     @Shadow public abstract VaultServerData getServerData();
 
-    // 1. Definition des Codecs: Eine Map von UUID zu Long
     @Unique
     private static final Codec<Map<UUID, Long>> LOOT_TIMES_CODEC = Codec.unboundedMap(Uuids.CODEC, Codec.LONG);
 
@@ -34,30 +33,29 @@ public abstract class VaultBlockEntityMixin extends BlockEntity {
         super(type, pos, state);
     }
 
-    // FIX: writeData nutzt jetzt den Codec
+    // writeData und readData bleiben hier (sind korrekt!)
     @Inject(method = "writeData", at = @At("TAIL"))
     private void writeCustomData(WriteView view, CallbackInfo ci) {
         VaultServerData data = this.getServerData();
 
-        // FIX: Cast auf das Interface IVaultCooldown, NICHT auf das Mixin!
         if (data instanceof IVaultCooldown cooldownData) {
             Map<UUID, Long> times = cooldownData.getLootTimesMap();
 
-            // Codec nutzen, um die Map zu speichern
-            view.put("SimpleBuildingLootTimes", LOOT_TIMES_CODEC, times);
+            if (times != null && !times.isEmpty()) {
+                view.put("SimpleBuildingLootTimes", LOOT_TIMES_CODEC, times);
+            }
         }
     }
 
-    // FIX: readData nutzt jetzt den Codec
     @Inject(method = "readData", at = @At("TAIL"))
     private void readCustomData(ReadView view, CallbackInfo ci) {
         VaultServerData data = this.getServerData();
 
-        // FIX: Cast auf das Interface
         if (data instanceof IVaultCooldown cooldownData) {
-            // Codec nutzen, um die Map zu laden. Wenn vorhanden, in das Data-Objekt setzen.
-            view.read("SimpleBuildingLootTimes", LOOT_TIMES_CODEC)
-                    .ifPresent(cooldownData::setLootTimesMap);
+            // FIX: Hier stand .get, es muss aber .read sein!
+            view.read("SimpleBuildingLootTimes", LOOT_TIMES_CODEC).ifPresent(loadedMap -> {
+                cooldownData.setLootTimesMap(loadedMap);
+            });
         }
     }
 }

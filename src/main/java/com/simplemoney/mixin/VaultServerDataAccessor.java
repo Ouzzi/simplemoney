@@ -9,7 +9,10 @@ import java.util.UUID;
 
 @Mixin(VaultServerData.class)
 public interface VaultServerDataAccessor {
-    // Wir greifen direkt auf das Feld "rewardedPlayers" zu
     @Accessor("rewardedPlayers")
     Set<UUID> getRewardedPlayersSet();
+
+    // NEU: Damit wir markieren können, dass sich Daten geändert haben
+    @Accessor("dirty")
+    void setDirty(boolean dirty);
 }
