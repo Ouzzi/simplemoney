@@ -15,7 +15,6 @@
 * **⚖️ Better Villagers:** Trading is now based on a weighted probability system. Rare enchants like **Mending** are harder to find but guaranteed at specific levels.
 * **🕵️ Black Market:** The Wandering Trader is finally useful! He now sells non-renewable items like **Netherite Scrap** and **Shulker Shells**.
 * **🌍 Exploration Loot:** Money Bills have been injected into Shipwrecks, Strongholds, and Buried Treasure.
-* **⏱️ Vault Cooldowns:** Prevents infinite looting by adding a configurable cooldown to Vaults (Default: 100 Days).
 
 ---
 
