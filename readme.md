@@ -24,7 +24,8 @@ SimpleMoney is fully configurable! You can tweak the balancing to fit your modpa
 * **⚖️ Economy Control:** You can individually **enable or disable** the custom Villager Trades or the Wandering Trader overhaul if they conflict with other mods.
 * **⏱️ Vault Cooldown:** Define how many in-game days must pass before a player can loot a Vault again (Default: **100 Days**).
 
-![Mod Config Main](https://cdn.modrinth.com/data/cached_images/c090086540b9afe809413b1526cf36312c6ced35_0.webp)
+![Mod Config Main](https://cdn.modrinth.com/data/cached_images/ca9fd5bbb1b875e8e4aaedafe517e1b0c918dd92_0.webp)
+
 
 ## 🏗️ Money Production Chain
 Creating currency is an industrial process involving chemistry, precision, and heat.
