@@ -41,7 +41,7 @@ public class ModTradeOffers {
     public static void addTrades(List<TradeOffers.Factory> factories) {
         // FIX: (world, entity, random)
         factories.add((world, entity, random) -> {
-            int emeraldAmount = random.nextInt(5) + 3; // 3 bis 7 Smaragde (Durchschnitt 5)
+            int emeraldAmount = random.nextInt(40) + 3; // 3 bis 7 Smaragde (Durchschnitt 5)
             return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 1), new ItemStack(Items.EMERALD, emeraldAmount), 8, 5, 0.05f);
         });
     }
@@ -132,7 +132,7 @@ public class ModTradeOffers {
             // 6. ARMORER
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER, 2, factories -> {
                 // FIX: (world, entity, random)
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(Items.DIAMOND, 8), new ItemStack(ModItems.MONEY_BILL, 2), 2, 10, 0.2f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(Items.DIAMOND, 7), new ItemStack(ModItems.MONEY_BILL, 2), 2, 10, 0.2f));
             });
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER, 3, factories -> {
                 List<WeightedEnchantment> enchantmentPoolHelmet = List.of(
@@ -184,8 +184,8 @@ public class ModTradeOffers {
                 );
 
                 // FIX: (world, entity, random)
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 7), createRandomEnchantedItem(entity, random, Items.DIAMOND_CHESTPLATE, enchantmentPoolMasterChestplate, 10), 1, 50, 0.7f));
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 5), createRandomEnchantedItem(entity, random, Items.DIAMOND_BOOTS, enchantmentPoolMasterBoots, 10), 2, 15, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 5), createRandomEnchantedItem(entity, random, Items.DIAMOND_CHESTPLATE, enchantmentPoolMasterChestplate, 10), 1, 50, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_BOOTS, enchantmentPoolMasterBoots, 10), 2, 15, 0.7f));
             });
 
             // 7. TOOLSMITH
@@ -197,8 +197,8 @@ public class ModTradeOffers {
                 );
 
                 // FIX: (world, entity, random)
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_HOE, toolPoolLevel3, 10), 2, 15, 0.7f));
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_SHOVEL, toolPoolLevel3, 10), 2, 10, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 2), createRandomEnchantedItem(entity, random, Items.DIAMOND_HOE, toolPoolLevel3, 10), 2, 15, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 2), createRandomEnchantedItem(entity, random, Items.DIAMOND_SHOVEL, toolPoolLevel3, 10), 2, 10, 0.7f));
             });
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.TOOLSMITH, 4, factories -> {
                 List<WeightedEnchantment> toolPoolLevel4 = List.of(
@@ -209,8 +209,8 @@ public class ModTradeOffers {
                 );
 
                 // FIX: (world, entity, random)
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 6), createRandomEnchantedItem(entity, random, Items.DIAMOND_PICKAXE, toolPoolLevel4, 10), 1, 15, 0.7f));
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 4), createRandomEnchantedItem(entity, random, Items.DIAMOND_AXE, toolPoolLevel4, 10), 1, 15, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_PICKAXE, toolPoolLevel4, 10), 1, 15, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_AXE, toolPoolLevel4, 10), 1, 15, 0.7f));
             });
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.TOOLSMITH, 5, factories -> {
                 List<WeightedEnchantment> toolPoolLevel5Tool = List.of(
@@ -231,10 +231,10 @@ public class ModTradeOffers {
                 );
 
                 // FIX: (world, entity, random)
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 9), createRandomEnchantedItem(entity, random, Items.DIAMOND_PICKAXE, toolPoolLevel5Tool, 10), 1, 30, 0.7f));
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 6), createRandomEnchantedItem(entity, random, Items.DIAMOND_SWORD, toolPoolLevel5Weapon, 10), 1, 30, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 4), createRandomEnchantedItem(entity, random, Items.DIAMOND_PICKAXE, toolPoolLevel5Tool, 10), 1, 30, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 4), createRandomEnchantedItem(entity, random, Items.DIAMOND_SWORD, toolPoolLevel5Weapon, 10), 1, 30, 0.7f));
 
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(Items.DIAMOND, 8), new ItemStack(ModItems.MONEY_BILL, 2), 5, 10, 0.1f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(Items.DIAMOND, 7), new ItemStack(ModItems.MONEY_BILL, 2), 5, 10, 0.1f));
             });
         }
     }
@@ -254,23 +254,27 @@ public class ModTradeOffers {
                     return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.APPLE, appleAmount), 3, 10, 0.1f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
-                    int moneyBillAmount = random.nextInt(20) + 20;
+                    int moneyBillAmount = random.nextInt(10) + 30;
                     int netheriteScrapAmount = random.nextInt(1) + 1;
                     return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.NETHERITE_SCRAP, netheriteScrapAmount), 1, 100, 0.5f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
-                    int moneyBillAmount = random.nextInt(30) + 50;
+                    int moneyBillAmount = random.nextInt(30) + 30;
                     return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.SHULKER_SHELL, 1), 1, 200, 0.5f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
                     int moneyBillAmount = random.nextInt(2) + 5;
                     int oreAmount = random.nextInt(1) + 6;
-                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.DIAMOND_ORE, oreAmount), 2, 150, 0.5f);
+                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.DIAMOND_ORE, oreAmount), 5, 150, 0.5f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
                     int moneyBillAmount = random.nextInt(2) + 5;
                     int oreAmount = random.nextInt(1) + 4;
-                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.DEEPSLATE_DIAMOND_ORE, oreAmount), 2, 150, 0.5f);
+                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.DEEPSLATE_DIAMOND_ORE, oreAmount), 7, 150, 0.5f);
+                });
+                factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
+                    int moneyBillAmount = random.nextInt(15) + 50;
+                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.BUDDING_AMETHYST, 64), 5, 150, 0.5f);
                 });
             });
         }
