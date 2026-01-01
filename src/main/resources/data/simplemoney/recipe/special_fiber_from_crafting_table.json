@@ -1,12 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AIA",
-    "GCG",
-    "DGD"
+    "CGA",
+    "DAG",
+    "GDC"
   ],
   "key": {
-    "I": "minecraft:iron_nugget",
     "D": "minecraft:diamond",
     "G": "minecraft:gold_nugget",
     "C": "minecraft:copper_nugget",

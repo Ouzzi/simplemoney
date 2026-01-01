@@ -8,7 +8,7 @@
   "key": {
     "#": "minecraft:green_dye",
     "I": "minecraft:ink_sac",
-    "P": "simplemoney:blank_note"
+    "P": "simplemoney:refined_blank_note"
   },
   "result": {
     "id": "simplemoney:raw_bill",

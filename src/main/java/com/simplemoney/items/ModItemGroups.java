@@ -17,7 +17,9 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.SPECIAL_PAPER);
                         entries.add(ModItems.SPECIAL_FIBER);
+                        entries.add(ModItems.RESIN_FIBER);
                         entries.add(ModItems.BLANK_NOTE);
+                        entries.add(ModItems.REFINED_BLANK_NOTE);
                         entries.add(ModItems.RAW_BILL);
                         entries.add(ModItems.MONEY_BILL);
                     }).build());

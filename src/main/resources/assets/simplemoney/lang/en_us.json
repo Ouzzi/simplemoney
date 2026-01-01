@@ -1,13 +1,17 @@
 {
     "item.simplemoney.special_paper": "Special Paper",
     "item.simplemoney.special_fiber": "Special Fiber",
+    "item.simplemoney.resin_fiber": "Resin Fiber",
     "item.simplemoney.blank_note": "Banknote Blank",
+    "item.simplemoney.refined_blank_note": "Refined Banknote Blank",
     "item.simplemoney.raw_bill": "Raw Bill",
     "item.simplemoney.money_bill": "Money Bill",
 
     "tooltip.simplemoney.special_paper.tooltip": "Paper made from exotic material.",
-    "tooltip.simplemoney.special_fiber.tooltip": "A crude mixture. Requires extreme heat for refinement.",
-    "tooltip.simplemoney.blank_note.tooltip": "Unprinted, high-quality paper.",
+  "tooltip.simplemoney.special_fiber.tooltip": "A crude mixture. Requires extreme heat for refinement.",
+  "tooltip.simplemoney.resin_fiber.tooltip": "Sticky and durable fiber, ideal for crafting.",
+  "tooltip.simplemoney.blank_note.tooltip": "Unprinted, high-quality paper.",
+    "tooltip.simplemoney.refined_blank_note.tooltip": "Treated for durability and quality.",
     "tooltip.simplemoney.raw_bill.tooltip": "Still damp from the press.",
     "tooltip.simplemoney.money_bill.tooltip": "Highest trading value.",
 

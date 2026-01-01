@@ -56,6 +56,15 @@ public class ModItems {
                 }
             }
     );
+    public static final Item RESIN_FIBER = registerItem("resin_fiber", setting -> new Item(setting.maxCount(16))
+            {
+                @Override
+                public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+                    textConsumer.accept(Text.translatable("tooltip.simplemoney.resin_fiber.tooltip"));
+                    super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+                }
+            }
+    );
     /**
      * BANKNOTE_BLANK: Der unbedruckte Rohling.
      * Eigenschaften: Rarity UNCOMMON, Max. Stapelgröße 64 (standardmäßig, da maxCount fehlt).
@@ -65,6 +74,15 @@ public class ModItems {
                 @Override
                 public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
                     textConsumer.accept(Text.translatable("tooltip.simplemoney.blank_note.tooltip"));
+                    super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+                }
+            }
+    );
+    public static final Item REFINED_BLANK_NOTE = registerItem("refined_blank_note", setting -> new Item(setting.rarity(UNCOMMON))
+            {
+                @Override
+                public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+                    textConsumer.accept(Text.translatable("tooltip.simplemoney.refined_blank_note.tooltip"));
                     super.appendTooltip(stack, context, displayComponent, textConsumer, type);
                 }
             }
@@ -109,6 +127,12 @@ public class ModItems {
                     if (!world.isClient()) {
                         // Play sound effect for using the money bill
                         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 0.6f, 6.0f);
+                        world.addParticleClient(
+                                net.minecraft.particle.ParticleTypes.HAPPY_VILLAGER,
+                                user.getX(), user.getY() + 1.0,
+                                user.getZ(),
+                                0.0, 0.1, 0.0
+                        );
                     }
 
                     return ActionResult.SUCCESS;
