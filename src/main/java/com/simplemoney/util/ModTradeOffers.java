@@ -261,13 +261,15 @@ public class ModTradeOffers {
                     return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.APPLE, appleAmount), 3, 10, 0.1f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
-                    int moneyBillAmount = random.nextInt(20) + 30;
-                    int netheriteScrapAmount = random.nextInt(1) + 3;
+                    int moneyBillAmount = random.nextInt(15) + 30;
+                    int netheriteScrapAmount = random.nextInt(1) + 7;
                     return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.NETHERITE_SCRAP, netheriteScrapAmount), 1, 100, 0.5f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
-                    int moneyBillAmount = random.nextInt(30) + 30;
-                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.SHULKER_SHELL, 1), 1, 200, 0.5f);
+                    int moneyBillAmount = random.nextInt(10) + 30;
+                    int shulkerShellAmount = random.nextInt(1) + 2;
+                    int maxUses = random.nextInt(1) + 1;
+                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.SHULKER_SHELL, shulkerShellAmount), maxUses, 200, 0.5f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
                     int moneyBillAmount = random.nextInt(2) + 5;
@@ -280,8 +282,8 @@ public class ModTradeOffers {
                     return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.DEEPSLATE_DIAMOND_ORE, oreAmount), 7, 150, 0.5f);
                 });
                 factory.addOffersToPool(TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL, (world, entity, random) -> {
-                    int moneyBillAmount = random.nextInt(15) + 50;
-                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.BUDDING_AMETHYST, 3), 5, 150, 0.5f);
+                    int moneyBillAmount = random.nextInt(5) + 14;
+                    return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, moneyBillAmount), new ItemStack(Items.BUDDING_AMETHYST, 1), 3, 150, 0.5f);
                 });
             });
         }
