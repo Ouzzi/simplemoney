@@ -1,5 +1,5 @@
 ## Todo
-— balance trades
+— balance trades 
 — add coins (copper, iron, gold)
 
 later

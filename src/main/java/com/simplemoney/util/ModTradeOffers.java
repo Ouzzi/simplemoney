@@ -41,8 +41,8 @@ public class ModTradeOffers {
     public static void addTrades(List<TradeOffers.Factory> factories) {
         // FIX: (world, entity, random)
         factories.add((world, entity, random) -> {
-            int emeraldAmount = random.nextInt(35) + 3; // 3 bis 7 Smaragde (Durchschnitt 5)
-            return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 1), new ItemStack(Items.EMERALD, emeraldAmount), 8, 5, 0.05f);
+            int emeraldAmount = random.nextInt(33) + 3;
+            return new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 1), new ItemStack(Items.EMERALD, emeraldAmount), 10, 10, 0.05f);
         });
     }
 
@@ -144,7 +144,7 @@ public class ModTradeOffers {
 
             // 6. ARMORER
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER, 2, factories -> {
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(Items.DIAMOND, 7), new ItemStack(ModItems.MONEY_BILL, 2), 2, 10, 0.2f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(Items.DIAMOND, 15), new ItemStack(ModItems.MONEY_BILL, 2), 2, 10, 0.2f));
             });
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER, 3, factories -> {
                 List<WeightedEnchantment> enchantmentPoolHelmet = List.of(
@@ -165,15 +165,27 @@ public class ModTradeOffers {
             });
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER, 4, factories -> {
                 List<WeightedEnchantment> enchantmentPoolChestplate = List.of(
-                        new WeightedEnchantment(Enchantments.PROTECTION, 2, 40),
-                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 3, 25),
-                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 3, 15),
-                        new WeightedEnchantment(Enchantments.UNBREAKING, 2, 20)
+                        new WeightedEnchantment(Enchantments.PROTECTION, 3, 40),
+                        new WeightedEnchantment(Enchantments.PROTECTION, 4, 40),
+                        new WeightedEnchantment(Enchantments.BLAST_PROTECTION, 3, 30),
+                        new WeightedEnchantment(Enchantments.BLAST_PROTECTION, 4, 30),
+                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 3, 30),
+                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 4, 30),
+                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 3, 30),
+                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 4, 30),
+                        new WeightedEnchantment(Enchantments.UNBREAKING, 2, 20),
+                        new WeightedEnchantment(Enchantments.UNBREAKING, 3, 20)
                 );
 
                 List<WeightedEnchantment> enchantmentPoolLeggings = List.of(
-                        new WeightedEnchantment(Enchantments.PROTECTION, 2, 40),
+                        new WeightedEnchantment(Enchantments.PROTECTION, 3, 40),
+                        new WeightedEnchantment(Enchantments.PROTECTION, 4, 40),
                         new WeightedEnchantment(Enchantments.BLAST_PROTECTION, 3, 30),
+                        new WeightedEnchantment(Enchantments.BLAST_PROTECTION, 4, 30),
+                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 3, 30),
+                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 4, 30),
+                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 3, 30),
+                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 4, 30),
                         new WeightedEnchantment(Enchantments.SWIFT_SNEAK, 1, 5)
                 );
 
@@ -183,6 +195,9 @@ public class ModTradeOffers {
             TradeOfferHelper.registerVillagerOffers(VillagerProfession.ARMORER, 5, factories -> {
                 List<WeightedEnchantment> enchantmentPoolMasterChestplate = List.of(
                         new WeightedEnchantment(Enchantments.PROTECTION, 4, 50),
+                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.BLAST_PROTECTION, 4, 10),
                         new WeightedEnchantment(Enchantments.THORNS, 3, 30),
                         new WeightedEnchantment(Enchantments.UNBREAKING, 3, 20)
                 );
@@ -190,11 +205,15 @@ public class ModTradeOffers {
                 List<WeightedEnchantment> enchantmentPoolMasterBoots = List.of(
                         new WeightedEnchantment(Enchantments.FEATHER_FALLING, 4, 40),
                         new WeightedEnchantment(Enchantments.DEPTH_STRIDER, 3, 30),
+                        new WeightedEnchantment(Enchantments.PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.BLAST_PROTECTION, 4, 10),
                         new WeightedEnchantment(Enchantments.SOUL_SPEED, 1, 10)
                 );
 
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 5), createRandomEnchantedItem(entity, random, Items.DIAMOND_CHESTPLATE, enchantmentPoolMasterChestplate, 10), 1, 50, 0.7f));
-                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_BOOTS, enchantmentPoolMasterBoots, 10), 2, 15, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 5), createRandomEnchantedItem(entity, random, Items.DIAMOND_CHESTPLATE, enchantmentPoolMasterChestplate, 30), 1, 50, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_BOOTS, enchantmentPoolMasterBoots, 30), 2, 15, 0.7f));
             });
 
             // 7. TOOLSMITH
