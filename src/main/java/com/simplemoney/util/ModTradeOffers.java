@@ -212,8 +212,19 @@ public class ModTradeOffers {
                         new WeightedEnchantment(Enchantments.SOUL_SPEED, 1, 10)
                 );
 
+                List<WeightedEnchantment> enchantmentPoolMasterHelmet = List.of(
+                        new WeightedEnchantment(Enchantments.PROTECTION, 4, 50),
+                        new WeightedEnchantment(Enchantments.PROJECTILE_PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.FIRE_PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.BLAST_PROTECTION, 4, 10),
+                        new WeightedEnchantment(Enchantments.AQUA_AFFINITY, 1, 20),
+                        new WeightedEnchantment(Enchantments.RESPIRATION, 3, 30),
+                        new WeightedEnchantment(Enchantments.THORNS, 3, 30)
+                );
+
                 factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 5), createRandomEnchantedItem(entity, random, Items.DIAMOND_CHESTPLATE, enchantmentPoolMasterChestplate, 30), 1, 50, 0.7f));
                 factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 3), createRandomEnchantedItem(entity, random, Items.DIAMOND_BOOTS, enchantmentPoolMasterBoots, 30), 2, 15, 0.7f));
+                factories.add((world, entity, random) -> new TradeOffer(new TradedItem(ModItems.MONEY_BILL, 5), createRandomEnchantedItem(entity, random, Items.DIAMOND_HELMET, enchantmentPoolMasterHelmet, 30), 1, 50, 0.7f));
             });
 
             // 7. TOOLSMITH
